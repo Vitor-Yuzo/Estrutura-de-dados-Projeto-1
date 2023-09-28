@@ -3,6 +3,29 @@
 #include <locale.h>
 #include "FILA.h"
 
+void com_e_sem_atrasos(Fila*f)
+{
+    No* aux;
+
+    printf ("\nAS TAREFAS COM ATRASO SÃO: \n");
+    for (aux=f->ini; aux!=NULL; aux=aux->prox)
+    {
+        if (aux->info.status == 1)
+        printf("%s - ",aux->info.nome_tarefa);
+    }
+
+    printf ("\n\nAS TAREFAS SEM ATRASO SÃO: \n");
+    for (aux=f->ini; aux!=NULL; aux=aux->prox)
+    {
+        if (aux->info.status == 0)
+        printf("%s - ",aux->info.nome_tarefa);
+    }
+
+    printf ("\n\n");
+    system("pause");
+
+}
+
 tarefa adicionar (data data_atual)
 {
     tarefa tarefa;
@@ -85,6 +108,8 @@ tarefa adicionar (data data_atual)
         tarefa.status = 1;
     }
 
+    printf ("\n\n");
+    system ("pause");
 
     return tarefa;
 }
@@ -131,8 +156,7 @@ int main()
         printf ("[5]. Lista de tarefas pendentes\n");
         printf ("[6]. Lista de tarefas concluidas\n");
         printf ("[7]. Lista de tarefas concluidas com e sem atrasos\n");
-        printf ("[8]. Informe a data atual\n");
-        printf ("[9]. Sair do programa\n");
+        printf ("[8]. Sair do programa\n");
         printf ("\nDigite sua opcao: ");
         scanf ("%d",&opcao);
 
@@ -156,23 +180,19 @@ int main()
             break;
 
             case 6: concluidas();
+            break;*/
+
+            case 7: com_e_sem_atrasos(f);
             break;
 
-            case 7: com_e_sem_atrasos();
-            break;
-
-            */
-            case 8: data_atual = recebe_data();
-            break;
-
-            case 9:
+            case 8:
             system("cls");
             printf ("Programa finalizado");
             return 0;
             break;
         }
 
-    }while(opcao!=9);
+    }while(opcao!=8);
 
     return 0;
 }
